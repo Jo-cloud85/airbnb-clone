@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '../hooks/useRegisterModal';
 import Modal from './Modal';
@@ -35,7 +35,7 @@ const RegisterModal = () => {
       .then(() => {
         registerModal.onClose();
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Something went wrong");
       })
       .finally(() => {
@@ -67,8 +67,8 @@ const RegisterModal = () => {
       />
       <Input 
         id="password"
-        type="password"
         label="Password"
+        type="password"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -92,13 +92,15 @@ const RegisterModal = () => {
         icon={AiFillGithub}
         onClick={() => {}}
       />
-      <div className="flex flex-row justify-center items-center gap-3">
-        <div>Already have an account?</div>
-        <div
-          onClick={registerModal.onClose}
-          className="text-neutral-800 cursor-pointer hover:underline"
-        >
-          Log in
+      <div className='text-neutral-500 text-center mt-4 font-light'>
+        <div className="flex flex-row justify-center items-center gap-2">
+          <div>Already have an account?</div>
+          <div
+            onClick={registerModal.onClose}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          >
+            Log in
+          </div>
         </div>
       </div>
     </div>

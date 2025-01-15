@@ -17,14 +17,7 @@ const Search = () => {
         cursor-pointer
       "
     >
-      <div
-        className="
-          flex
-          flex-row
-          items-center
-          justify-between
-        "
-      >
+      <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">Anywhere</div>
         <div
           className="
@@ -38,7 +31,7 @@ const Search = () => {
             text-center
           "
         >
-          Any week
+          Any Week
         </div>
         <div
           className="

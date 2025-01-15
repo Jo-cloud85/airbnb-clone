@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { AiOutlineMenu } from "react-icons/ai"
 import Avatar from "../Avatar"
@@ -92,4 +92,4 @@ const UserMenu = () => {
   )
 }
 
-export default UserMenu
+export default UserMenu;

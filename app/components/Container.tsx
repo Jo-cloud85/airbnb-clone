@@ -4,6 +4,7 @@ interface ContainerProps {
   children: React.ReactNode;
 }
 
+// FC stands for functional component
 const Container:React.FC<ContainerProps> = ({children}) => {
   return (
     <div

@@ -71,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({
           items-center
           flex
           overflow-x-hidden
-          overflow-y-hidden
+          overflow-y-auto
           fixed
           inset-0
           z-50
@@ -171,8 +171,8 @@ const Modal: React.FC<ModalProps> = ({
                     label={actionLabel}
                     onClick={handleSubmit} 
                   />
-                  {footer}
                 </div>
+                {footer}
               </div>
             </div>
           </div>
