@@ -7,6 +7,7 @@ interface InputProps {
   id: string;
   label: string;
   type ?: string;
+  name?: string; // I added this field else the 'Password' input will have issues
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
@@ -18,6 +19,7 @@ const Input: React.FC<InputProps> = ({
   id,
   label,
   type = "text",
+  name,
   disabled,
   formatPrice,
   register,
@@ -38,6 +40,8 @@ const Input: React.FC<InputProps> = ({
         {...register(id, { required })}
         placeholder=" "
         type={type}
+        name={name}
+        autoComplete=" "
         className={`
           peer
           w-full

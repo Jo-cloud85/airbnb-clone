@@ -21,11 +21,11 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: 'credentials',
             credentials: {
-                email: {label: 'email', type: 'text'},
-                password: { label: 'password', type: 'password'},
+                email: { label: 'email', type: 'text'},
+                password: { label: 'password', type: 'password' },
             },
             async authorize(credentials) {
-                if(credentials?.email || !credentials?.password) {
+                if(!credentials?.email || !credentials?.password) {
                     throw new Error('Invalid credentials');
                 }
 
@@ -53,7 +53,7 @@ export const authOptions: AuthOptions = {
         })
     ],
     pages: {
-        signIn: '/',
+        // signIn: '/',
     },
     debug: process.env.NODE_ENV == 'development',
     session: {
@@ -63,3 +63,10 @@ export const authOptions: AuthOptions = {
 };
 
 export default NextAuth(authOptions);
+
+/* 
+I am commenting out signIn: '/' because I get this error when
+/?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F&error=OAuthAccountNotLinked... 
+If you see OAuthAccountNotLinked it means you have already signed in with a different provider that is associated 
+with the same email address. I was facing this issue coz I was trying to log in with google and github with same email.. 
+*/

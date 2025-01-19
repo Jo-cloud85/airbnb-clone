@@ -39,9 +39,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Packages to install
 
 npm i react-icons
-
+npm i zustand
+npm i axios
+npm i react-hook-form
+npm i react-hot-toast
+npm i -D prisma
+npx prisma init
 
 After settling the prisma and database, connect to next-auth by installing
 npm i next-auth @prisma/client @next-auth/prisma-adapter
 npm i bcrypt
 npm i -D @types/bcrypt
+
+## What I learnt
+### React Hot Toast
+React Hot Toast is a library that adds toast notifications to React applications. It's designed to mimic push notifications on native operating systems, like iOS and Android.

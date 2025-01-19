@@ -12,9 +12,9 @@ const Logo = () => {
       className="hidden md:block cursor-pointer"
       height="100"
       width="100"
-      src="/images/airbnb-logo-long.svg"
+      src="/images/airbnb-logo-long.png"
     />
   )
 }
 
-export default Logo;
+export default Logo
