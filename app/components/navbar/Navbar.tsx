@@ -5,6 +5,7 @@ import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import Categories from "./Categories";
 
 interface NavbarProps {
   currentUser?: User | null; // this is the User type that you defined in schema.prisma
@@ -36,6 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   )
 }

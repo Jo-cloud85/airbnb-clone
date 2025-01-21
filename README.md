@@ -51,6 +51,13 @@ npm i next-auth @prisma/client @next-auth/prisma-adapter
 npm i bcrypt
 npm i -D @types/bcrypt
 
+npm i query-string
+npm i world-countries
+npm i leaflet
+npm i -D @types/leaflet
+npm i react-leaflet
+npm i next-cloudinary
+
 ## What I learnt
 ### React Hot Toast
 React Hot Toast is a library that adds toast notifications to React applications. It's designed to mimic push notifications on native operating systems, like iOS and Android.

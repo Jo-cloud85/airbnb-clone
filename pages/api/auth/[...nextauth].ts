@@ -53,9 +53,9 @@ export const authOptions: AuthOptions = {
         })
     ],
     pages: {
-        // signIn: '/',
+        signIn: '/',  // make sure you don't sign up sth with similar email like google and github similar email
     },
-    debug: process.env.NODE_ENV == 'development',
+    debug: process.env.NODE_ENV !== "production",
     session: {
         strategy: "jwt"
     },

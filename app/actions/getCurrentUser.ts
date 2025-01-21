@@ -25,7 +25,6 @@ export default async function getCurrentUser() {
         }
 
         return currentUser;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
     } catch (error: any) {
         return null;
     }

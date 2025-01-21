@@ -4,7 +4,7 @@ import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '../hooks/useRegisterModal';
 import useLoginModal from '../hooks/useLoginModal';
@@ -17,8 +17,10 @@ import { useRouter } from 'next/navigation'; //next/router is the old way, don't
 
 const LoginModal = () => {
   const router = useRouter();
-  const registerModal = useRegisterModal(); // u still need this when you want to switch
   const loginModal = useLoginModal();
+
+  const registerModal = useRegisterModal(); // u still need this when you want to switch
+  
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -56,6 +58,11 @@ const LoginModal = () => {
     })
   }
 
+  const toggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal])
+
   const bodyContent = (
     <form className='flex flex-col gap-4'>
       <Heading 
@@ -91,19 +98,19 @@ const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn('google')}
       />
       <Button 
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn('github')}
       />
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <div className="flex flex-row justify-center items-center gap-2">
-          <div>No account yet?</div>
+          <div>First time using Airbnb?</div>
           <div
-            onClick={loginModal.onClose}
+            onClick={toggle}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             Create an account
