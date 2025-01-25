@@ -18,7 +18,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   id,
   label,
-  type = "text",
+  type = "text", //default
   name,
   disabled,
   formatPrice,
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({
       <input 
         id={id}
         disabled={disabled}
-        {...register(id, { required })}
+        {...register(id, { required: "This field is required" })}
         placeholder=" "
         type={type}
         name={name}

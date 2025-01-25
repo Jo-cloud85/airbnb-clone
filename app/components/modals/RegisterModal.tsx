@@ -62,6 +62,7 @@ const RegisterModal = () => {
       <Input 
         id="email"
         label="Email"
+        type="email"
         name="email"
         disabled={isLoading}
         register={register}
@@ -71,6 +72,7 @@ const RegisterModal = () => {
       <Input 
         id="name"
         label="Name"
+        type="text"
         name="name"
         disabled={isLoading}
         register={register}

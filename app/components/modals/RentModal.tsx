@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from "react";
-import { FieldValues, set, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import useRentModal from "../hooks/useRentModal";
 
@@ -127,7 +127,7 @@ const RentModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
-      return "Create";
+      return "Create listing";
     }
     return "Next";
   }, [step]);
@@ -174,6 +174,7 @@ const RentModal = () => {
     </div>
   )
 
+  // Step === location //////////////
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -192,6 +193,7 @@ const RentModal = () => {
     )
   }
 
+  // Step === info //////////////
   if (step === STEPS.INFO) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -223,6 +225,7 @@ const RentModal = () => {
     )
   }
 
+  // Step === images //////////////
   if (step === STEPS.IMAGES) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -238,13 +241,8 @@ const RentModal = () => {
     )
   }
 
+  // Step === description //////////////
   if (step === STEPS.DESCRIPTION) {
-
-    console.log('Current Description Step Errors:', {
-      titleError: errors.title,
-      descriptionError: errors.description
-    });
-
     bodyContent = (
       <form className="flex flex-col gap-8">
         <Heading
@@ -255,12 +253,13 @@ const RentModal = () => {
           <Input
             id="title"
             label="Title"
+            name="title" //like the password field in login and register, i have to add this
             disabled={isLoading}
             register={register}
             errors={errors} 
             required
           />
-          {errors.title && (
+          {errors.title?.message && (
             <span className="text-red-500">
               This field is required
             </span>
@@ -271,12 +270,13 @@ const RentModal = () => {
           <Input
             id="description"
             label="Description"
+            name="description" //like the password field in login and register, i have to add this
             disabled={isLoading}
             register={register}
             errors={errors}
             required
           />
-          {errors.description && (
+          {errors.description?.message && (
             <span className="text-red-500">
               This field is required
             </span>
@@ -286,6 +286,7 @@ const RentModal = () => {
     )
   }
 
+  // Step === price //////////////
   if (step === STEPS.PRICE) {
     bodyContent = (
       <div className="flex flex-col gap-8">

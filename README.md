@@ -57,6 +57,7 @@ npm i leaflet
 npm i -D @types/leaflet
 npm i react-leaflet
 npm i next-cloudinary
+npm i date-fns
 
 ## What I learnt
 ### React Hot Toast
