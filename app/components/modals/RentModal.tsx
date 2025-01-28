@@ -297,6 +297,7 @@ const RentModal = () => {
         <Input
           id="price"
           label="Price"
+          name="price" //like the password field in login and register, i have to add this
           formatPrice
           type="number"
           disabled={isLoading}

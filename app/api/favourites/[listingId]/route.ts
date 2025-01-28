@@ -7,8 +7,8 @@ interface IParams {
     listingId?: string;
 }
 
-// Post //////////////////
-export async function POST (
+// Post ////////////////// ** explanation below why we don't use default
+export async function POST ( 
     req: Request,
     { params }: { params: IParams }
 ) {
@@ -74,3 +74,28 @@ export async function DELETE (
 
     return NextResponse.json(user);
 }
+
+/*
+In Next.js 13+, when creating API routes using the App Router (route.ts files), we don't use export default because:
+1. Route Handlers in Next.js 13+ are designed to support multiple HTTP methods in a single file. 
+Each method (GET, POST, DELETE, etc.) needs to be exported separately. For example:
+
+// route.ts
+export async function GET() { ... }
+export async function POST() { ... }
+export async function DELETE() { ... }
+
+2. This pattern allows Next.js to do better tree-shaking (removing unused code) since it can identify which HTTP 
+methods are actually being used.
+
+It's more explicit about which HTTP methods are supported by the route.
+
+// Don't do this in route.ts
+export default async function handler(request: Request, { params }: { params: IParams }) {
+  if (request.method === 'POST') {
+    // handle POST
+  } else if (request.method === 'DELETE') {
+    // handle DELETE
+  }
+}
+*/

@@ -22,9 +22,10 @@ const useFavourite = ({
     const hasFavourited = useMemo(() => {
         const list = currentUser?.favouriteIds || [];
 
-        return list.includes(listingId);
+        return list.includes(listingId); // returns true or false
     }, [currentUser, listingId]);
 
+    
     // Toggle favourite ////////////
     const toggleFavourite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -37,9 +38,9 @@ const useFavourite = ({
         try {
             let request;
 
-            if (hasFavourited) {
+            if (hasFavourited) { // if we have 'favourite-d', we want to be able to undo if we can
                 request = () => axios.delete(`/api/favourites/${listingId}`);
-            } else {
+            } else { // if not, we want to be able to favourite it
                 request = () => axios.post(`/api/favourites/${listingId}`);
             }
 

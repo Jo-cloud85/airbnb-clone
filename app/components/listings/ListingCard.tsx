@@ -67,7 +67,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(start, 'PP')} - ${format(end, 'PP')}`
   }, [reservation]);
 
-  // Main return //////////////
+  // main return //////////////
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
@@ -78,14 +78,16 @@ const ListingCard: React.FC<ListingCardProps> = ({
           className="
             aspect-square
             w-full
-            relative
+            rounded-xl
             overflow-hidden
+            relative
             relative-xl
           "
         >
           <Image 
             fill
             alt="Listing"
+            sizes="(max-width: 768px) 100vw, 33vw" // have to add this 'sizes' field
             src={data.imageSrc}
             className="
               object-cover
@@ -102,11 +104,16 @@ const ListingCard: React.FC<ListingCardProps> = ({
             />
           </div>
         </div>
-        <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
-        </div>
-        <div className="font-light text-neutral-500">
-          {reservationDate || data.category}
+        <div>
+          <div className="font-semibold text-lg">
+            {location?.region}, {location?.label}
+          </div>
+          <div className="font-light text-neutral-500 truncate">
+            {data.title}
+          </div>
+          {/* <div className="font-light text-neutral-500">
+            {reservationDate || data.category}
+          </div> */}
         </div>
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">
