@@ -7,7 +7,7 @@ import 'react-date-range/dist/theme/default.css';
 interface CalendarInputProps {
   value: Range;
   onChange: (value: RangeKeyDict) => void;
-  disabledDates: Date[];
+  disabledDates?: Date[];
 }
 
 const CalendarInput: React.FC<CalendarInputProps> = ({
@@ -25,9 +25,8 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
       showDateDisplay={false}
       minDate={new Date()}
       disabledDates={disabledDates}
-      moveRangeOnFirstSelection={false}
     />
   )
 }
 
-export default CalendarInput
+export default CalendarInput;

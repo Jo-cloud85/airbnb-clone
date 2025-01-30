@@ -8,10 +8,7 @@ interface IParams {
 }
 
 // Post ////////////////// ** explanation below why we don't use default
-export async function POST ( 
-    req: Request,
-    { params }: { params: IParams }
-) {
+export async function POST({ params }: { params: IParams }) {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {

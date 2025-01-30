@@ -23,17 +23,17 @@ const initialDateRange = {
 }
 
 interface ListingClientProps {
-    reservations?: Reservation[];
-    listing: Listing & {
-        user: User;
-    };
-    currentUser?: User | null;
+  reservations?: Reservation[];
+  listing: Listing & {
+    user: User;
+  };
+  currentUser?: User | null;
 }
 
 const ListingClient: React.FC<ListingClientProps> = ({
-    listing,
-    reservations = [],
-    currentUser
+  listing,
+  reservations = [],
+  currentUser
 }) => {
   const loginModal = useLoginModal();
   const router = useRouter();
@@ -41,12 +41,11 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
 
-    reservations.forEach((reservation: Reservation) => {
+    reservations.forEach((reservation) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate)
       });
-      
       dates = [...dates, ...range];
     });
 
@@ -88,7 +87,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(dateRange.startDate, dateRange.endDate);
+      const dayCount = differenceInCalendarDays(dateRange.endDate, dateRange.startDate);
 
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price);
