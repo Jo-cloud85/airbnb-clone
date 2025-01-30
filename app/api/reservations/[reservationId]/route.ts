@@ -8,7 +8,7 @@ interface IParams {
 }
 
 export async function DELETE(
-    request: Request, 
+    req: Request, //You have to include this even though req is not used
     { params }: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();

@@ -8,15 +8,17 @@ interface IParams {
 }
 
 // Post ////////////////// ** explanation below why we don't use default
-export async function POST({ params }: { params: IParams }) {
+export async function POST(
+    req: Request, //You have to include this even though req is not used
+    { params }: { params: IParams }
+) {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
         return NextResponse.error();
     }
 
-    // Destructure after awaiting params (dont follow tutorial)
-    const listingId = params.listingId;
+    const { listingId } = params;
 
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');
@@ -38,9 +40,10 @@ export async function POST({ params }: { params: IParams }) {
     return NextResponse.json(user);
 }
 
+
 // Delete //////////////////
 export async function DELETE (
-    req: Request,
+    req: Request, // You have to include this even though req is not used
     { params }: { params: IParams }
 ) {
     const currentUser = await getCurrentUser();
@@ -50,7 +53,7 @@ export async function DELETE (
     }
 
     // Destructure after awaiting params (dont follow tutorial)
-    const listingId = params.listingId;
+    const { listingId } = params;
 
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');

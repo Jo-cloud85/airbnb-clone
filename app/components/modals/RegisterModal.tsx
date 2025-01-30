@@ -20,6 +20,7 @@ const RegisterModal = () => {
   const loginModal = useLoginModal();
 
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -36,9 +37,12 @@ const RegisterModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+
     axios.post('/api/register', data)
       .then(() => {
+        toast.success('Success!');
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch(() => {
         toast.error("Something went wrong");

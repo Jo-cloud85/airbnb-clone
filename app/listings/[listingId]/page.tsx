@@ -10,12 +10,12 @@ interface IParams {
 
 const ListingPage = async ({ params }: { params: IParams }) => {
   try {
+    const { listingId } = await params;
+
     const [listing, currentUser, reservations] = await Promise.all([
       getListingById(params),
       getCurrentUser(),
-      getReservations({
-        listingId: params.listingId
-      })
+      getReservations({listingId})
     ]);
 
     if (!listing) {
@@ -27,7 +27,6 @@ const ListingPage = async ({ params }: { params: IParams }) => {
       );
     }
 
-    // No need for JSON parsing since getReservations returns data directly
     return (
       <div>
         <ListingClient 
