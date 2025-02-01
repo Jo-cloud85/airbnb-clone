@@ -4,8 +4,15 @@ import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
 
+/*
+I have to add the line below if not I will have this error:
+Error: Dynamic server usage: Route / couldn't be rendered statically because it used ``await searchParams`, `searchParams.then`, or similar`. 
+See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+*/
+export const dynamic = 'force-dynamic';
+
 interface HomeProps {
-  searchParams: IListingsParams
+  searchParams: Promise<IListingsParams>;
 }
 
 const Home = async ({ searchParams }: HomeProps) => {

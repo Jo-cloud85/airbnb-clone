@@ -9,7 +9,7 @@ interface IParams {
 
 export async function DELETE(
     req: Request,
-    { params }: { params: IParams }
+    { params }: { params: Promise<IParams> } // got this from https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 ) {
     const currentUser = await getCurrentUser();
 
@@ -17,7 +17,7 @@ export async function DELETE(
         return NextResponse.error();
     }
 
-    const { listingId } = params;
+    const listingId = (await params).listingId;
 
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');

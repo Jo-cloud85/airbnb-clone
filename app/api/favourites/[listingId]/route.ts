@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
@@ -8,9 +8,9 @@ interface IParams {
 }
 
 // Post ////////////////// ** explanation below why we don't use default
-export async function POST(
+export async function POST (
     req: Request, //You have to include this even though req is not used
-    { params }: { params: IParams }
+    { params }: { params: Promise<IParams> } // got this from https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 ) {
     const currentUser = await getCurrentUser();
 
@@ -18,7 +18,7 @@ export async function POST(
         return NextResponse.error();
     }
 
-    const { listingId } = params;
+    const listingId = (await params).listingId;
 
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');
@@ -44,7 +44,7 @@ export async function POST(
 // Delete //////////////////
 export async function DELETE (
     req: Request, // You have to include this even though req is not used
-    { params }: { params: IParams }
+    { params }: { params: Promise<IParams> } 
 ) {
     const currentUser = await getCurrentUser();
 
@@ -52,8 +52,7 @@ export async function DELETE (
         return NextResponse.error();
     }
 
-    // Destructure after awaiting params (dont follow tutorial)
-    const { listingId } = params;
+    const listingId = (await params).listingId;
 
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');

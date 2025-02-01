@@ -8,12 +8,24 @@ interface IParams {
   listingId?: string;
 }
 
-const ListingPage = async ({ params }: { params: IParams }) => {
+const ListingPage = async (
+  { params } : { params: Promise<IParams> }
+) => {
   try {
-    const { listingId } = await params;
+    const resolvedParams = await params;
+    const listingId = resolvedParams.listingId;
+
+    if (!listingId) {
+      return (
+        <EmptyState 
+          title="Invalid listing"
+          subtitle="This listing ID is invalid"
+        />
+      );
+    }
 
     const [listing, currentUser, reservations] = await Promise.all([
-      getListingById(params),
+      getListingById({listingId}),
       getCurrentUser(),
       getReservations({listingId})
     ]);
