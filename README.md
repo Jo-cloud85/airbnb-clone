@@ -60,6 +60,7 @@ npm i next-cloudinary
 npm i date-fns
 npm i react-date-range
 npm i -D @types/react-date-range
+npm i react-spinners
 
 ## What I learnt
 ### React Hot Toast

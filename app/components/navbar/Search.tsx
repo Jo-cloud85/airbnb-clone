@@ -2,10 +2,54 @@
 
 import { BiSearch } from "react-icons/bi";
 import useSearchModal from "../hooks/useSearchModal";
+import { useSearchParams } from "next/navigation";
+import useCountries from "../hooks/useCountries";
+import { useMemo } from "react";
+import { differenceInDays } from "date-fns";
 
 const Search = () => {
   const searchModal = useSearchModal();
+  const params = useSearchParams();
+  const { getByValue } = useCountries();
+
+  const locationValue = params?.get('locationValue');
+  const startDate = params?.get('startDate');
+  const endDate = params?.get('endDate');
+  const guestCount = params?.get('guestCount');
+
+  // Location Label
+  const locationLabel = useMemo(() => {
+    if (locationValue) {
+      return getByValue(locationValue as string)?.label;
+    }
+    return 'Anywhere';
+  }, [locationValue, getByValue]);
+
+  // Duration Label
+  const durationLabel = useMemo(() => {
+    if (startDate && endDate) {
+      const start = new Date(startDate as string);
+      const end = new Date(endDate as string);
+      let diff = differenceInDays(end, start);
+
+      if (diff === 0) {
+        diff = 1;
+      }
+      return `${diff} Days`;
+    }
+
+    return 'Any Week';
+  }, [startDate, endDate]);
   
+  // Guest Label
+  const guestLabel = useMemo(() => {
+    if (guestCount) {
+      return `${guestCount} Guests`;
+    }
+    return 'Add Guests';
+  }, [guestCount]);
+
+
   return (
     <div
       onClick={searchModal.onOpen}
@@ -22,7 +66,9 @@ const Search = () => {
       "
     >
       <div className="flex flex-row items-center justify-between">
-        <div className="text-sm font-semibold px-6">Anywhere</div>
+        <div className="text-sm font-semibold px-6">
+          {locationLabel}
+        </div>
         <div
           className="
             hidden
@@ -35,7 +81,7 @@ const Search = () => {
             text-center
           "
         >
-          Any Week
+          {durationLabel}
         </div>
         <div
           className="
@@ -49,7 +95,9 @@ const Search = () => {
             gap-3
           "
         >
-          <div className="hidden sm:block">Add Guests</div>
+          <div className="hidden sm:block">
+            {guestLabel}
+          </div>
           <div className="p-2 bg-rose-500 rounded-full text-white">
             <BiSearch size={18} />
           </div>
