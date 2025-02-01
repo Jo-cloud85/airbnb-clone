@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import EmptyState from "./components/EmptyState";
+import Loader from "./components/Loader";
 
 interface ErrorStateProps {
     error: Error;
@@ -13,10 +14,12 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error }) => {
     }, [error]);
 
     return (
-        <EmptyState
-            title="Oops"
-            subtitle="Something went wrong!"
-        />
+        <Suspense fallback={<Loader />}>
+            <EmptyState
+                title="Oops"
+                subtitle="Something went wrong!"
+            />
+        </Suspense>
     );
 }
 

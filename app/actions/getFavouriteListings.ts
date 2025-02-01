@@ -21,6 +21,5 @@ export default async function getFavouriteListings() {
         return favourites;
     } catch (error: any) {
         throw new Error(error);
-        return [];
     }
 }
