@@ -8,6 +8,7 @@ export async function getSession() {
 
 export default async function getCurrentUser() {
     try {
+        console.log("Fetching current user...");
         const session = await getSession();
 
         if (!session?.user?.email) {
